@@ -463,7 +463,7 @@ export default function App() {
             <span className="hint">
               {hint > 0
                 ? <><strong>{hint}</strong> {hint === 1 ? "detected input" : "inputs"}</>
-                : "None input"}
+                : "No input"}
             </span>
             <button className="btn-gen" onClick={generate}>
               Generate ↵
