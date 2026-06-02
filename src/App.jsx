@@ -183,14 +183,14 @@ export default function App() {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-          --bg:     #0d0d0d;
-          --panel:  #161616;
+          --bg:     #ffffff;
+          --panel:  #d4d4d4;
           --border: #2a2a2a;
-          --accent: #e8ff47;
-          --accent2: #ff6b35;
-          --text:   #f0f0f0;
+          --accent: #4759ff;
+          --accent2: #5a35ff;
+          --text:   #585858;
           --muted:  #666;
-          --card:   #111;
+          --card:   #d4d4d4;
         }
 
         body {
@@ -215,7 +215,7 @@ export default function App() {
         }
         .header-badge {
           background: var(--accent);
-          color: #000;
+          color: #ffffff;
           font-family: 'Space Mono', monospace;
           font-size: 9px;
           font-weight: 700;
@@ -230,11 +230,12 @@ export default function App() {
           font-weight: 800;
           line-height: 1;
           letter-spacing: -.02em;
+          color: var(--border);
         }
         .header h1 span { color: var(--accent); }
         .header p {
           margin-top: 10px;
-          color: var(--muted);
+          color: var(--border);
           font-size: 14px;
           font-family: 'Space Mono', monospace;
           line-height: 1.6;
@@ -267,7 +268,7 @@ export default function App() {
 
         textarea {
           width: 100%;
-          background: #0a0a0a;
+          background: #ffffff;
           border: 1px solid var(--border);
           color: var(--text);
           font-family: 'Space Mono', monospace;
@@ -279,8 +280,8 @@ export default function App() {
           outline: none;
           transition: border-color .2s;
         }
-        textarea:focus { border-color: var(--accent); }
-        textarea::placeholder { color: #333; }
+        textarea:focus { border-color: var(--border); }
+        textarea::placeholder { color: #000000; }
 
         .input-footer {
           display: flex;
@@ -310,7 +311,7 @@ export default function App() {
           transition: transform .15s, background .15s;
           text-transform: uppercase;
         }
-        .btn-gen:hover { background: #f5ff70; transform: translateY(-1px); }
+        .btn-gen:hover { background: #70aeff; transform: translateY(-1px); }
         .btn-gen:active { transform: translateY(0); }
 
         .sep {
@@ -428,7 +429,7 @@ export default function App() {
         }
         .count-tag {
           background: var(--accent);
-          color: #000;
+          color: #ffffff;
           font-family: 'Space Mono', monospace;
           font-size: 11px;
           font-weight: 700;
@@ -438,36 +439,34 @@ export default function App() {
 
       <div className="app">
         <div className="header">
-          <div className="header-badge">GS1-128</div>
           <div>
-            <h1>Gerador de<br/><span>Código de Barras</span></h1>
+            <h1>Barcode<br/><span>generator</span></h1>
             <p>
-              Um grupo por linha (ou separe com <code>;</code> ou <code>|</code>)<br/>
-              Gera automaticamente um código para cada entrada.
+              Split by line (or using <code>;</code> or <code>|</code>)<br/>
             </p>
           </div>
         </div>
 
         <div className="input-panel">
-          <div className="panel-label">Dados de entrada</div>
+          <div className="panel-label">Input</div>
           <textarea
             value={input}
             onChange={e => { setInput(e.target.value); setGenerated(false); }}
             onKeyDown={handleKey}
-            placeholder={"Exemplo:\n(01)07613304003499\n(10)LOT-2024-A\nABC-PRODUTO-XYZ"}
+            placeholder={"(01)07613304003499\n(10)LOT-2024-A\nABC-PRODUTO-XYZ"}
             spellCheck={false}
           />
           <div className="sep">
-            Separadores aceitos: nova linha / ponto-e-vírgula <code>;</code> / pipe <code>|</code>
+            Accepted spliters: new line / comma <code>;</code> / pipe <code>|</code>
           </div>
           <div className="input-footer">
             <span className="hint">
               {hint > 0
-                ? <><strong>{hint}</strong> {hint === 1 ? "grupo detectado" : "grupos detectados"}</>
-                : "Nenhum grupo detectado"}
+                ? <><strong>{hint}</strong> {hint === 1 ? "detected input" : "inputs"}</>
+                : "None input"}
             </span>
             <button className="btn-gen" onClick={generate}>
-              Gerar códigos ↵
+              Generate ↵
             </button>
           </div>
         </div>
@@ -475,8 +474,8 @@ export default function App() {
         {generated && groups.length > 0 && (
           <>
             <div className="count-bar">
-              <h2>Códigos gerados</h2>
-              <span className="count-tag">{groups.length} {groups.length === 1 ? "código" : "códigos"}</span>
+              <h2>generated codes</h2>
+              <span className="count-tag">{groups.length} {groups.length === 1 ? "code" : "codes"}</span>
             </div>
             <div className="grid">
               {groups.map((g, i) => (
@@ -489,14 +488,14 @@ export default function App() {
         {generated && groups.length === 0 && (
           <div className="empty">
             <span className="big">〄</span>
-            Nenhum grupo encontrado. Adicione texto acima.
+            No input. Input something (la ele)
           </div>
         )}
 
         {!generated && (
           <div className="empty">
             <span className="big">▦</span>
-            Clique em <strong>Gerar códigos</strong> ou pressione Ctrl+Enter
+            Press <strong>Generate</strong> or use Ctrl+Enter
           </div>
         )}
       </div>
