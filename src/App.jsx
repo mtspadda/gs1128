@@ -62,7 +62,7 @@ export default function App() {
       {generated && groups.length > 0 && (
         <>
           <div className="count-bar">
-            <h2>Códigos gerados</h2>
+            <h2>Generated codes</h2>
             <span className="count-tag">
               {groups.length} {groups.length === 1 ? "code" : "codes"}
             </span>
